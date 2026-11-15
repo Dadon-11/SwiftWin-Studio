@@ -27,7 +27,7 @@
 
 ---
 
-![SwiftWin Studio: code, logs and the live iPhone](docs/screenshots/code-mode.png)
+https://github.com/user-attachments/assets/49e6149f-a1dc-4a06-be98-2d4219f87b8b
 
 You know the problem. You want to make an iPhone app, you have a good Windows PC and an iPhone, and
 every guide starts with "first, buy a Mac". SwiftWin skips that step: it compiles your SwiftUI app with
