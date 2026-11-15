@@ -1,0 +1,41 @@
+name: Bug report
+description: Something in SwiftWin doesn't work
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Please don't paste your Apple ID, passwords, tokens or `.p8` keys here.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open SwiftWin
+        2. Click ...
+        3. See error ...
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Output of `swiftwin doctor`
+      description: Run it in PowerShell and paste the result (it lists what is set up on your PC and phone).
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: SwiftWin version
+      placeholder: "0.1.1"
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: Windows version, iPhone model and iOS version
+      placeholder: "Windows 11 24H2, iPhone 15, iOS 18.2"

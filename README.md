@@ -1,7 +1,29 @@
-# SwiftWin
+<p align="center">
+  <img src="app/src-tauri/icons/128x128@2x.png" width="128" height="128" alt="SwiftWin logo">
+</p>
 
-**Build, run and test SwiftUI iPhone apps on Windows, on your real iPhone, with no Mac.**
-And let Claude Code do it too.
+<h1 align="center">SwiftWin Studio</h1>
+
+<p align="center">
+  <b>Build, run and test SwiftUI iPhone apps on Windows, on your real iPhone, with no Mac.</b><br>
+  And let Claude Code or Codex do it too.
+</p>
+
+<p align="center">
+  <a href="https://github.com/Dadon-11/SwiftWin-Studio/releases/latest"><img src="https://img.shields.io/github/v/release/Dadon-11/SwiftWin-Studio?label=release&color=1f6feb" alt="Latest release"></a>
+  <a href="https://github.com/Dadon-11/SwiftWin-Studio/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Dadon-11/SwiftWin-Studio/ci.yml?branch=main&label=ci" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/Dadon-11/SwiftWin-Studio?color=2ea043" alt="MIT license"></a>
+  <img src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6" alt="Windows 10 and 11">
+  <a href="https://github.com/Dadon-11/SwiftWin-Studio/releases"><img src="https://img.shields.io/github/downloads/Dadon-11/SwiftWin-Studio/total?color=8957e5" alt="Downloads"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Dadon-11/SwiftWin-Studio/releases/latest"><b>Download</b></a> ·
+  <a href="docs/first-run.md">First run</a> ·
+  <a href="#use-it-with-claude-code-or-codex">Claude Code &amp; Codex</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
+  <a href="CONTRIBUTING.md">Contributing</a>
+</p>
 
 SwiftWin compiles your SwiftUI app with the open-source Swift toolchain, signs it with your Apple ID,
 installs it on the iPhone plugged into your PC over USB, and shows the phone live on your screen,
