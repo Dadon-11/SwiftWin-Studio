@@ -39,6 +39,10 @@
       "nsis"
     ],
     "publisher": "SwiftWin",
+    "copyright": "Copyright (c) 2026 Yoav Dadon. MIT License.",
+    "homepage": "https://github.com/Dadon-11/SwiftWin-Studio",
+    "license": "MIT",
+    "licenseFile": "../../LICENSE",
     "shortDescription": "Build and test SwiftUI iOS apps on a real iPhone from Windows",
     "icon": [
       "icons/32x32.png",
@@ -54,6 +58,9 @@
       "nsis": {
         "installMode": "currentUser",
         "displayLanguageSelector": false,
+        "installerIcon": "icons/icon.ico",
+        "headerImage": "windows/installer-header.bmp",
+        "sidebarImage": "windows/installer-sidebar.bmp",
         "installerHooks": "./windows/hooks.nsh"
       },
       "webviewInstallMode": {

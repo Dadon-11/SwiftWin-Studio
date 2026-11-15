@@ -178,8 +178,9 @@ welcome ([docs/testing-checklist.md](docs/testing-checklist.md)).
 
 ## Author
 
-Made by Yoav Dadon ([@Dadon-11](https://github.com/Dadon-11)). Contact:
-swiftwin-support@googlegroups.com.
+Made by Yoav Dadon ([@Dadon-11](https://github.com/Dadon-11)), with
+[Claude](https://claude.com/claude-code) (Anthropic's AI) as co-developer: most of the code, tests and docs
+were written with Claude Code. Contact: swiftwin-support@googlegroups.com.
 
 ## License
 
