@@ -40,10 +40,12 @@ Each milestone ends with: CI green, `--mock` demo working, docs updated.
 
 ## Development workflow (important)
 
-> **Since 2026-11-06 the owner keeps this project local: no GitHub.** The repository has no remote on
-> purpose. Do not push, open pull requests or use GitHub CI. Where the text below says "push" or "CI",
-> commit locally and run `cargo test --workspace` plus the UI test instead; build the installer on this
-> PC (see README, "Build, test and install").
+> **Since 2026-11-15 SwiftWin is public at https://github.com/Dadon-11/SwiftWin-Studio**, published from
+> cleaned snapshots (`scripts/publish-snapshot.ps1`, docs/publishing.md). The owner's working repository
+> keeps its private history and has no remote on purpose: never add a remote to it or push it. The owner
+> pushes to the public repo themself. Where the text below says "push" or "CI", commit locally and run
+> `cargo test --workspace` plus the UI test instead; build the installer on this PC (see README,
+> "Build, test and install").
 
 Phase 1 is building the **complete app without an iPhone**. The owner will connect a real iPhone only after the app is finished.
 

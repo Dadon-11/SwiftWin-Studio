@@ -29,7 +29,7 @@ start, when an update URL is set, first found of:
 
 - `SWIFTWIN_UPDATE_URL` (environment variable),
 - `"update_url"` in `%LOCALAPPDATA%\SwiftWin\data\config.json`,
-- `plugins.updater.endpoints` in `app/src-tauri/tauri.conf.json` (empty today).
+- `plugins.updater.endpoints` in `app/src-tauri/tauri.conf.json` (the public repo's GitHub Releases).
 
 The URL must be `https://` and return a `latest.json` (below). If a newer version is listed, the app shows
 "SwiftWin x.y.z is available. Click to install and restart"; a click downloads it, checks the signature,

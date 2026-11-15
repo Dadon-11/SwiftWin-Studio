@@ -29,7 +29,7 @@
   "plugins": {
     "updater": {
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDI4RDAwRTNBQUZDMDhBNDAKUldSQWlzQ3ZPZzdRS0FDd3k2SnY3bFZZTlJJc3g3dStLRTdHNU1oOFJDQlFXN1dzYlNtNUhCVFYK",
-      "endpoints": [],
+      "endpoints": ["https://github.com/Dadon-11/SwiftWin-Studio/releases/latest/download/latest.json"],
       "windows": { "installMode": "passive" }
     }
   },
