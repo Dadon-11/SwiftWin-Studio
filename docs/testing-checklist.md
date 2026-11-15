@@ -45,8 +45,9 @@ Write down for each step: ✅ / ❌, how long it took, and the exact error text 
 - [ ] The app opens on the sign-in screen. **Terms** and **Privacy Policy** open and are readable.
 - [ ] **Continue without an account** works (the app opens Home; everything except cloud builds and
       Upload works).
-- [ ] **Continue with Google**: until Google sign-in is published, only Gmail addresses the owner added as
-      test users can sign in. Otherwise use GitHub. (Email sign-up is off on purpose.)
+- [ ] **Continue with Google** works with any Google account (published 2026-11-15). Google's screen
+      shows the sign-in service's address instead of "SwiftWin" until the brand is verified. (Email
+      sign-up is off on purpose.)
 - [ ] **Continue with GitHub** works.
 - [ ] Account settings: change name, sign out, sign in again.
 - [ ] **Delete account** with a throwaway account: back on the sign-in screen; that account can't sign

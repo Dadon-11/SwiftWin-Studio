@@ -42,8 +42,8 @@ Each milestone ends with: CI green, `--mock` demo working, docs updated.
 
 > **Since 2026-11-15 SwiftWin is public at https://github.com/Dadon-11/SwiftWin-Studio**, published from
 > cleaned snapshots (`scripts/publish-snapshot.ps1`, docs/publishing.md). The owner's working repository
-> keeps its private history and has no remote on purpose: never add a remote to it or push it. The owner
-> pushes to the public repo themself. Where the text below says "push" or "CI", commit locally and run
+> keeps its private history and has no remote on purpose: never add a remote to it or push it. Public
+> updates go out only from the `swiftwin-public` snapshot folder, and only when the owner asks. Where the text below says "push" or "CI", commit locally and run
 > `cargo test --workspace` plus the UI test instead; build the installer on this PC (see README,
 > "Build, test and install").
 

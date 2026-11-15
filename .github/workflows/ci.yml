@@ -53,8 +53,6 @@ jobs:
           # Shared data dir so `swiftwin mcp` (AI-mode part of the test) finds the app bridge.
           $env:SWIFTWIN_HOME = "$env:RUNNER_TEMP\swiftwin-home"
           $env:SWIFTWIN_BIN = (Resolve-Path "..\target\release\swiftwin.exe").Path
-          # AI mode's chat runs this recorded Claude Code session instead of the real `claude`.
-          $env:SWIFTWIN_CLAUDE = (Resolve-Path "tests\fake-claude.mjs").Path
           $server = Start-Process -FilePath $env:SWIFTWIN_BIN -ArgumentList "--mock","ui","--port","8787","--static","dist","--latency-ms","150" -PassThru
           Start-Sleep -Seconds 2
           $env:SWIFTWIN_UI_PROJECT_DIR = "$env:RUNNER_TEMP\uiproj"
