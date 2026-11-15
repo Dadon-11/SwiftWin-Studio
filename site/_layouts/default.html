@@ -3,32 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>{{ page.title }} · SwiftWin</title>
 <link rel="icon" href="{{ '/assets/icon.png' | relative_url }}">
 <style>
-  :root { --bg: #07080b; --line: #1d2027; --text: #eef1f6; --dim: #8a92a0; --cyan: #7cc4ff;
-          --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, Menlo, monospace;
-          --sans: -apple-system, "Segoe UI", system-ui, Helvetica, Arial, sans-serif; }
-  body { margin: 0; background: var(--bg); color: #c6ccd6; font: 16px/1.7 var(--sans); -webkit-font-smoothing: antialiased; }
-  header { border-bottom: 1px solid var(--line); padding: 18px 22px; }
-  header a { font: 700 14px var(--mono); color: var(--text); text-decoration: none; }
-  header a i { display: inline-block; width: 8px; height: 15px; background: var(--cyan); vertical-align: -2px; margin-left: 6px; }
-  main { max-width: 760px; margin: 0 auto; padding: 50px 22px 90px; }
-  h1, h2, h3 { color: var(--text); font-family: var(--mono); letter-spacing: -.01em; line-height: 1.2; }
-  h1 { font-size: 38px; margin-top: 0; }
+  :root { --bg: #f5f5f7; --text: #1d1d1f; --dim: #6e6e73; --accent: #0071e3; --line: rgba(0,0,0,.1); --panel: rgba(255,255,255,.7);
+          --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #000; --text: #f5f5f7; --dim: #a1a1a6; --accent: #2997ff; --line: rgba(255,255,255,.12); --panel: rgba(40,40,46,.6); } }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.65 var(--font); -webkit-font-smoothing: antialiased; }
+  header { position: sticky; top: 0; padding: 14px 22px; background: var(--panel); border-bottom: 1px solid var(--line);
+           -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); }
+  header a { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--text); text-decoration: none; }
+  header img { width: 22px; height: 22px; border-radius: 6px; }
+  main { max-width: 720px; margin: 0 auto; padding: 50px 22px 90px; }
+  h1, h2, h3 { letter-spacing: -.02em; line-height: 1.2; }
+  h1 { font-size: 40px; margin-top: 0; }
   h2 { font-size: 22px; margin-top: 2.2em; }
-  a { color: var(--cyan); }
-  strong { color: var(--text); }
+  p, li { color: var(--text); }
+  a { color: var(--accent); }
   table { border-collapse: collapse; width: 100%; font-size: 14px; display: block; overflow-x: auto; }
   th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
-  th { color: var(--text); }
-  code { font-family: var(--mono); font-size: .9em; background: #12151b; padding: 2px 5px; border-radius: 4px; }
-  footer { border-top: 1px solid var(--line); padding: 30px 22px; text-align: center; font: 13px var(--mono); color: var(--dim); }
-  footer a { color: var(--dim); margin: 0 8px; text-decoration: none; }
+  code { font-size: .9em; background: var(--panel); padding: 2px 5px; border-radius: 5px; }
+  footer { text-align: center; padding: 30px 22px 50px; font-size: 13px; color: var(--dim); }
+  footer a { color: var(--dim); margin: 0 9px; text-decoration: none; }
 </style>
 </head>
 <body>
-<header><a href="{{ '/' | relative_url }}">swiftwin<i></i></a></header>
+<header><a href="{{ '/' | relative_url }}"><img src="{{ '/assets/icon.png' | relative_url }}" alt="">SwiftWin</a></header>
 <main>{{ content }}</main>
 <footer>
   <a href="{{ '/' | relative_url }}">Home</a>

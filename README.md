@@ -32,17 +32,6 @@
 
 ![SwiftWin Studio: code, logs and the live iPhone](docs/screenshots/code-mode.png)
 
-## Already built with SwiftWin
-
-<table>
-  <tr>
-    <td align="center"><img src="docs/readme/tempo.png" width="72" height="72" alt="Tempo app icon"><br><b>Tempo</b></td>
-  </tr>
-</table>
-
-Made something with SwiftWin? [Open an issue](https://github.com/Dadon-11/SwiftWin-Studio/issues/new/choose)
-with its name and icon and it goes here.
-
 You know the problem. You want to make an iPhone app, you have a good Windows PC and an iPhone, and
 every guide starts with "first, buy a Mac". SwiftWin skips that step: it compiles your SwiftUI app with
 the open-source Swift toolchain, signs it with your Apple ID, installs it on the iPhone plugged into your
