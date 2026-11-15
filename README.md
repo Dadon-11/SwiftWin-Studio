@@ -1,8 +1,11 @@
 <p align="center">
-  <img src="app/src-tauri/icons/128x128@2x.png" width="128" height="128" alt="SwiftWin logo">
+  <a href="https://dadon-11.github.io/SwiftWin-Studio/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-dark.svg">
+      <img src="docs/readme/hero-light.svg" width="960" alt="SwiftWin Studio: iPhone apps, built on Windows. 0 Macs needed, 4 s to compile an edit, 27 s from edit to iPhone, 23 fps live mirror.">
+    </picture>
+  </a>
 </p>
-
-<h1 align="center">SwiftWin Studio</h1>
 
 <p align="center"><i>Plug in your iPhone. Write SwiftUI. Press Run. No Mac.</i></p>
 
@@ -12,10 +15,6 @@
   <img src="https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20Codex-555?style=flat-square" alt="Works with Claude Code and Codex">
   <img src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-555?style=flat-square" alt="Windows 10 and 11">
   <a href="LICENSE"><img src="https://img.shields.io/github/license/Dadon-11/SwiftWin-Studio?style=flat-square&color=555" alt="MIT license"></a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/Dadon-11/SwiftWin-Studio/releases/latest"><img src="docs/readme/hero.svg" width="960" alt="SwiftWin 0.1: SwiftUI iPhone apps, built and run from Windows. 0 Macs needed, 23 fps live mirror, 4 s rebuild, 20+ AI tools."></a>
 </p>
 
 <p align="center">
@@ -41,10 +40,22 @@ through it and read the logs.
 
 ## Numbers
 
-<p align="center"><img src="docs/readme/numbers.svg" width="960" alt="First build 301 s once; edit to running on the iPhone 27 s; compile after an edit 4 s; mirror 23 fps over USB."></p>
+<p align="center">
+  <a href="https://dadon-11.github.io/SwiftWin-Studio/#speed">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/readme/numbers-dark.svg">
+      <img src="docs/readme/numbers-light.svg" width="960" alt="Fast enough to forget about: first build 301 s once; edit to running on the iPhone 27 s; compile after an edit 4 s.">
+    </picture>
+  </a>
+</p>
 
 <p align="center">
-  <a href="https://github.com/sponsors/Dadon-11"><img src="docs/readme/sponsor.svg" width="960" alt="Like SwiftWin? Sponsor the project"></a>
+  <a href="https://github.com/sponsors/Dadon-11">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/readme/sponsor-dark.svg">
+      <img src="docs/readme/sponsor-light.svg" width="960" alt="Like SwiftWin? Sponsor the project">
+    </picture>
+  </a>
 </p>
 
 ## Features
