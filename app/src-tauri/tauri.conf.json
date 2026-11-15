@@ -1,0 +1,65 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "SwiftWin",
+  "version": "0.1.0",
+  "identifier": "dev.swiftwin.desktop",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "create": false,
+        "title": "SwiftWin Studio",
+        "width": 1440,
+        "height": 920,
+        "minWidth": 800,
+        "minHeight": 560
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; worker-src 'self' blob:; connect-src 'self' ipc: http://ipc.localhost; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "dangerousDisableAssetCspModification": ["style-src"]
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDI4RDAwRTNBQUZDMDhBNDAKUldSQWlzQ3ZPZzdRS0FDd3k2SnY3bFZZTlJJc3g3dStLRTdHNU1oOFJDQlFXN1dzYlNtNUhCVFYK",
+      "endpoints": [],
+      "windows": { "installMode": "passive" }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis"
+    ],
+    "publisher": "SwiftWin",
+    "shortDescription": "Build and test SwiftUI iOS apps on a real iPhone from Windows",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.ico",
+      "icons/icon.png"
+    ],
+    "resources": {
+      "../../target/release/swiftwin.exe": "bin/swiftwin.exe"
+    },
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "displayLanguageSelector": false,
+        "installerHooks": "./windows/hooks.nsh"
+      },
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper"
+      }
+    },
+    "longDescription": "SwiftWin Studio, the Visual Studio experience for SwiftUI on Windows, builds, signs, installs and tests SwiftUI apps on a real iPhone over USB from Windows. Includes the `swiftwin` command line in the bin folder."
+  }
+}

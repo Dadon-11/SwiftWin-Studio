@@ -1,0 +1,227 @@
+:where(:root, [data-theme="light"]) {
+  --lg-foreground: rgb(0 0 0 / 0.88);
+  --lg-muted: rgb(60 60 67 / 0.6);
+  --lg-glass: rgb(255 255 255 / 0.6);
+  --lg-glass-active: rgb(236 236 240 / 0.85);
+  --lg-edge: rgb(0 0 0 / 0.08);
+  --lg-drop: rgb(0 0 0 / 0.06);
+  --lg-selection: rgb(0 0 0 / 0.1);
+  --lg-lens: rgb(0 0 0 / 0.03);
+  --lg-lens-drop: rgb(0 0 0 / 0.11);
+  --lg-segment-track: rgb(118 118 128 / 0.12);
+  --lg-segment-thumb: rgb(255 255 255);
+  --lg-segment-label: rgb(0 0 0);
+  --lg-segment-lens: rgb(0 0 0 / 0.03);
+  --lg-surface: rgb(250 250 252 / 0.86);
+  --lg-surface-edge: rgb(0 0 0 / 0.08);
+  --lg-shadow: rgb(25 25 35 / 0.12);
+  --lg-highlight: rgb(60 60 67 / 0.09);
+  --lg-separator: rgb(60 60 67 / 0.15);
+  --lg-destructive: #ff383c;
+  --lg-track: rgb(59 59 66 / 0.3);
+  --lg-rail: rgb(0 0 0 / 0.1);
+  --lg-on: #34c759;
+  --lg-fill: #0088ff;
+  --lg-ring: rgb(0 0 0 / 0.4);
+  --lg-lens-shine: -1.5;
+  --lg-rim-shine: 0.3;
+  --lg-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+:where([data-theme="dark"]) {
+  --lg-foreground: rgb(255 255 255);
+  --lg-muted: rgb(235 235 245 / 0.6);
+  --lg-glass: rgb(40 40 40 / 0.62);
+  --lg-glass-active: rgb(70 70 70 / 0.62);
+  --lg-edge: rgb(255 255 255 / 0.08);
+  --lg-drop: transparent;
+  --lg-selection: rgb(255 255 255 / 0.145);
+  --lg-lens: rgb(255 255 255 / 0.055);
+  --lg-lens-drop: transparent;
+  --lg-segment-track: transparent;
+  --lg-segment-thumb: rgb(235 235 245 / 0.3);
+  --lg-segment-label: rgb(255 255 255);
+  --lg-segment-lens: transparent;
+  --lg-surface: rgb(28 28 31 / 0.86);
+  --lg-surface-edge: rgb(255 255 255 / 0.13);
+  --lg-shadow: rgb(0 0 0 / 0.38);
+  --lg-highlight: rgb(235 235 245 / 0.13);
+  --lg-separator: rgb(235 235 245 / 0.16);
+  --lg-destructive: #ff4245;
+  --lg-track: rgb(235 235 245 / 0.3);
+  --lg-rail: rgb(255 255 255 / 0.1);
+  --lg-on: #30d158;
+  --lg-fill: #0091ff;
+  --lg-ring: rgb(255 255 255 / 0.5);
+  --lg-lens-shine: 1;
+  --lg-rim-shine: 0.13;
+}
+
+@media (prefers-color-scheme: dark) {
+  :where(:root:not([data-theme="light"])) {
+    --lg-foreground: rgb(255 255 255);
+    --lg-muted: rgb(235 235 245 / 0.6);
+    --lg-glass: rgb(40 40 40 / 0.62);
+    --lg-glass-active: rgb(70 70 70 / 0.62);
+    --lg-edge: rgb(255 255 255 / 0.08);
+    --lg-drop: transparent;
+    --lg-selection: rgb(255 255 255 / 0.145);
+    --lg-lens: rgb(255 255 255 / 0.055);
+    --lg-lens-drop: transparent;
+    --lg-segment-track: transparent;
+    --lg-segment-thumb: rgb(235 235 245 / 0.3);
+    --lg-segment-label: rgb(255 255 255);
+    --lg-segment-lens: transparent;
+    --lg-surface: rgb(28 28 31 / 0.86);
+    --lg-surface-edge: rgb(255 255 255 / 0.13);
+    --lg-shadow: rgb(0 0 0 / 0.38);
+    --lg-highlight: rgb(235 235 245 / 0.13);
+    --lg-separator: rgb(235 235 245 / 0.16);
+    --lg-destructive: #ff4245;
+    --lg-track: rgb(235 235 245 / 0.3);
+    --lg-rail: rgb(255 255 255 / 0.1);
+    --lg-on: #30d158;
+    --lg-fill: #0091ff;
+    --lg-ring: rgb(255 255 255 / 0.5);
+  --lg-lens-shine: 1;
+    --lg-rim-shine: 0.13;
+  }
+}
+
+/* Glass */
+
+.lg-glass {
+  position: relative;
+  background-color: var(--lg-glass);
+  background-image: var(--lg-rim, none);
+  background-size: 100% 100%;
+  -webkit-backdrop-filter: blur(var(--lg-blur, 3px)) var(--lg-filter, saturate(1.5));
+  backdrop-filter: blur(var(--lg-blur, 3px)) var(--lg-filter, saturate(1.5));
+  box-shadow:
+    inset 0 0 0 0.5px var(--lg-edge),
+    0 1px 3px var(--lg-drop);
+}
+
+/* Glass that paints its rim (see refraction.ts) draws its edge line there,
+   under the light, which an inset shadow would cover. */
+.lg-glass[data-rim] {
+  box-shadow: 0 1px 3px var(--lg-drop);
+}
+
+.lg-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 240px at var(--lg-x, 50%) var(--lg-y, 50%),
+    rgb(255 255 255 / 0.035),
+    rgb(255 255 255 / 0.025) 50%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 220ms ease-in-out;
+}
+
+.lg-glass[data-pressed]::after {
+  opacity: 1;
+  transition-duration: 0s;
+}
+
+/* Button */
+
+.lg-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 20px;
+  color: var(--lg-foreground);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  /* A long press keeps pressing, as on iOS, rather than selecting the label. */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background-color 200ms ease;
+}
+
+.lg-button[data-icon] {
+  padding-left: 12px;
+}
+
+.lg-button[data-icon="only"] {
+  width: 40px;
+  padding: 0;
+}
+
+.lg-button > svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+/* Lights up at once when pressed, as on iOS, and fades on release. */
+.lg-button:is(:active, [data-pressed]) {
+  background-color: var(--lg-glass-active);
+  transition-duration: 0s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lg-button:hover {
+    background-color: var(--lg-glass-active);
+  }
+}
+
+.lg-button:disabled {
+  background-color: var(--lg-glass);
+  opacity: 0.35;
+  cursor: default;
+}
+
+.lg-button[data-destructive]:not([data-tint]) {
+  --lg-tint: var(--lg-destructive);
+}
+
+.lg-button:is([data-tint], [data-destructive]) {
+  color: var(--lg-tint);
+}
+
+.lg-button[data-variant="filled"] {
+  --lg-button-fill: var(--lg-tint, var(--lg-fill));
+  color: #fff;
+}
+
+.lg-button[data-variant="filled"],
+.lg-button[data-variant="filled"]:disabled {
+  background-color: var(--lg-button-fill);
+}
+
+.lg-button[data-variant="filled"]:is(:active, [data-pressed]) {
+  background-color: color-mix(in srgb, var(--lg-button-fill) 85%, #000);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lg-button[data-variant="filled"]:hover {
+    background-color: color-mix(in srgb, var(--lg-button-fill) 88%, #fff);
+  }
+
+  .lg-button[data-variant="filled"]:hover:is(:active, [data-pressed]) {
+    background-color: color-mix(in srgb, var(--lg-button-fill) 85%, #000);
+  }
+}
+
+.lg-button:focus-visible,
+.lg-tab:focus-visible,
+.lg-switch:focus-visible,
+.lg-menu-item:focus-visible {
+  outline: 2px solid var(--lg-ring);
+  outline-offset: 2px;
+}

@@ -1,0 +1,14 @@
+[package]
+name = "swiftwin-sdk"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Extracts the iOS SDK from Xcode.xip (downloaded with the user's own Apple ID) and packages it as a Swift SDK"
+
+[dependencies]
+swiftwin-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+flate2.workspace = true
+lzma-rs.workspace = true
+ureq.workspace = true

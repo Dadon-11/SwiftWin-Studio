@@ -1,0 +1,97 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+# CI only reads the repo; artifact upload doesn't need a write token.
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec # stable
+        with:
+          toolchain: stable
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
+        with:
+          workspaces: |
+            . -> target
+            app/src-tauri -> target
+      - name: Test
+        if: hashFiles('Cargo.toml') != ''
+        run: cargo test --workspace
+      - name: Build release CLI
+        if: hashFiles('Cargo.toml') != ''
+        run: cargo build --release -p swiftwin-cli
+      - name: Set up Node (desktop app)
+        if: hashFiles('app/package.json') != ''
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+      - name: Build desktop app
+        if: hashFiles('app/package.json') != ''
+        working-directory: app
+        run: |
+          npm ci
+          npm audit --audit-level=high
+          npm run tauri build
+      - name: UI test (desktop UI against the mock iPhone)
+        if: hashFiles('app/package.json') != ''
+        working-directory: app
+        shell: pwsh
+        run: |
+          npm install --no-save playwright@1.63.0
+          npx playwright install chromium
+          New-Item -ItemType Directory -Force -Path "$env:RUNNER_TEMP\uiproj", "$env:RUNNER_TEMP\ui-shots" | Out-Null
+          # Shared data dir so `swiftwin mcp` (AI-mode part of the test) finds the app bridge.
+          $env:SWIFTWIN_HOME = "$env:RUNNER_TEMP\swiftwin-home"
+          $env:SWIFTWIN_BIN = (Resolve-Path "..\target\release\swiftwin.exe").Path
+          # AI mode's chat runs this recorded Claude Code session instead of the real `claude`.
+          $env:SWIFTWIN_CLAUDE = (Resolve-Path "tests\fake-claude.mjs").Path
+          $server = Start-Process -FilePath $env:SWIFTWIN_BIN -ArgumentList "--mock","ui","--port","8787","--static","dist","--latency-ms","150" -PassThru
+          Start-Sleep -Seconds 2
+          $env:SWIFTWIN_UI_PROJECT_DIR = "$env:RUNNER_TEMP\uiproj"
+          node tests/ui-mock.mjs "$env:RUNNER_TEMP\ui-shots"
+          $code = $LASTEXITCODE
+          Stop-Process -Id $server.Id -Force
+          exit $code
+      - name: Upload UI screenshots
+        if: always() && hashFiles('app/package.json') != ''
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ui-screenshots
+          path: ${{ runner.temp }}/ui-shots
+          if-no-files-found: ignore
+      - name: Upload Windows build
+        if: hashFiles('Cargo.toml') != ''
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: swiftwin-windows
+          path: |
+            target/release/swiftwin.exe
+            app/src-tauri/target/release/bundle/**
+            target/release/bundle/**
+          if-no-files-found: ignore
+
+  # Known vulnerabilities in Rust dependencies (both lockfiles). Ignored advisories, with the
+  # reason each one does not apply, are in .cargo/audit.toml.
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: taiki-e/install-action@c509219cf42fba86913069efd0ade2458c59337b # v2.90.1
+        with:
+          tool: cargo-audit
+      - name: cargo audit (workspace)
+        run: cargo audit
+      - name: cargo audit (desktop app)
+        run: cargo audit --file app/src-tauri/Cargo.lock

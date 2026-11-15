@@ -1,0 +1,26 @@
+[package]
+name = "swiftwin-app-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Backend of the SwiftWin desktop app (shared by the Tauri shell and the browser/test server)"
+
+[dependencies]
+swiftwin-core.workspace = true
+swiftwin-device.workspace = true
+swiftwin-control.workspace = true
+swiftwin-builder.workspace = true
+swiftwin-workflow.workspace = true
+swiftwin-doctor.workspace = true
+swiftwin-sdk.workspace = true
+swiftwin-mcp.workspace = true
+swiftwin-inspo.workspace = true
+swiftwin-account.workspace = true
+swiftwin-signer.workspace = true
+rand.workspace = true
+swiftwin-mirror.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+
+[dev-dependencies]
+p256.workspace = true

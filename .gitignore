@@ -1,0 +1,24 @@
+/target
+**/target
+node_modules/
+app/dist/
+*.log
+# Never commit Apple credentials, keys, certificates or the extracted SDK
+*.p8
+*.p12
+*.pfx
+*.key
+*.pem
+*.cer
+*.mobileprovision
+!**/tests/fixtures/**
+*.xip
+/sdk/
+*.artifactbundle/
+.swiftwin/
+# Inspo captures can show private screens
+.inspo/
+
+# Local only: the owner's build-time IDs and private publish-scan patterns
+swiftwin-build.env
+publish-patterns.txt

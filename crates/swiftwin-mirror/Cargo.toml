@@ -1,0 +1,13 @@
+[package]
+name = "swiftwin-mirror"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Hybrid phone mirroring for SwiftWin: USB screenshot stream + AirPlay receiver with automatic fallback"
+
+[dependencies]
+swiftwin-core.workspace = true
+serde.workspace = true
+
+[dev-dependencies]
+swiftwin-device.workspace = true

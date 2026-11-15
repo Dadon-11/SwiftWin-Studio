@@ -1,0 +1,15 @@
+[package]
+name = "swiftwin-inspo"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Inspo: capture another app's screens on the phone and turn them into a style guide (palette, type scale, spacing)"
+
+[dependencies]
+swiftwin-core.workspace = true
+swiftwin-device.workspace = true
+swiftwin-control.workspace = true
+swiftwin-builder.workspace = true
+serde.workspace = true
+png.workspace = true
+serde_json.workspace = true

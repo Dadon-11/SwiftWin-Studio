@@ -1,0 +1,15 @@
+# `cargo audit` settings (CI runs it on both lockfiles). Every ignored advisory says why it
+# does not apply; re-check them when the crates are updated. See docs/security.md.
+[advisories]
+ignore = [
+    # rsa: Marvin attack (timing side channel on RSA *decryption*). SwiftWin only generates keys
+    # and signs, on the user's own PC, with no remote party able to time it. No fixed rsa yet.
+    "RUSTSEC-2023-0071",
+    # crypto-bigint 0.5 (via p256/elliptic-curve): timing variability. Same reasoning: local
+    # signing of App Store Connect JWTs, never an oracle reachable from outside. The fix needs
+    # p256 0.14 / elliptic-curve 0.14 (not released as stable yet).
+    "RUSTSEC-2026-0387",
+    # unsafe-libyaml is unmaintained: only pulled in by serde_yaml, a dev-dependency of
+    # swiftwin-release used to parse the generated workflow in tests. Not in any shipped binary.
+    "RUSTSEC-2024-0449",
+]

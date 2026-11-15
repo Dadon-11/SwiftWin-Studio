@@ -1,0 +1,20 @@
+[package]
+name = "swiftwin-app"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "SwiftWin desktop app (Tauri)"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-single-instance = "2"
+serde_json = "1"
+swiftwin-app-core = { path = "../../crates/swiftwin-app-core" }
+swiftwin-core = { path = "../../crates/swiftwin-core" }
+tauri-plugin-updater = "2"
+
+[profile.dev.package.num-bigint-dig]
+opt-level = 3

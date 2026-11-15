@@ -1,0 +1,13 @@
+[package]
+name = "swiftwin-control"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "UI control for SwiftWin: WebDriverAgent driver and the Phone facade"
+
+[dependencies]
+swiftwin-core.workspace = true
+swiftwin-device.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+ureq.workspace = true

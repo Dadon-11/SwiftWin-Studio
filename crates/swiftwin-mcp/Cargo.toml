@@ -1,0 +1,16 @@
+[package]
+name = "swiftwin-mcp"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "MCP server exposing SwiftWin to Claude Code (build, install_run, screenshot, ui_tree, tap, swipe, type, logs, release, inspo_capture)"
+
+[dependencies]
+swiftwin-core.workspace = true
+swiftwin-device.workspace = true
+swiftwin-control.workspace = true
+swiftwin-builder.workspace = true
+swiftwin-workflow.workspace = true
+swiftwin-inspo.workspace = true
+serde.workspace = true
+serde_json.workspace = true

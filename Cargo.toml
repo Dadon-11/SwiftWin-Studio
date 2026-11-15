@@ -1,0 +1,65 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/swiftwin-core",
+    "crates/swiftwin-device",
+    "crates/swiftwin-control",
+    "crates/swiftwin-sdk",
+    "crates/swiftwin-builder",
+    "crates/swiftwin-signer",
+    "crates/swiftwin-workflow",
+    "crates/swiftwin-mirror",
+    "crates/swiftwin-mcp",
+    "crates/swiftwin-app-core",
+    "crates/swiftwin-release",
+    "crates/swiftwin-doctor",
+    "crates/swiftwin-account",
+    "crates/swiftwin-inspo",
+    "cli",
+]
+# The Tauri desktop app has its own Cargo project (built by `npm run tauri build`).
+exclude = ["app/src-tauri"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[workspace.dependencies]
+swiftwin-core = { path = "crates/swiftwin-core" }
+swiftwin-device = { path = "crates/swiftwin-device" }
+swiftwin-control = { path = "crates/swiftwin-control" }
+swiftwin-sdk = { path = "crates/swiftwin-sdk" }
+swiftwin-builder = { path = "crates/swiftwin-builder" }
+swiftwin-signer = { path = "crates/swiftwin-signer" }
+swiftwin-workflow = { path = "crates/swiftwin-workflow" }
+swiftwin-mirror = { path = "crates/swiftwin-mirror" }
+swiftwin-mcp = { path = "crates/swiftwin-mcp" }
+swiftwin-app-core = { path = "crates/swiftwin-app-core" }
+swiftwin-release = { path = "crates/swiftwin-release" }
+swiftwin-doctor = { path = "crates/swiftwin-doctor" }
+swiftwin-account = { path = "crates/swiftwin-account" }
+swiftwin-inspo = { path = "crates/swiftwin-inspo" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "1"
+anyhow = "1"
+clap = { version = "4", features = ["derive", "env"] }
+plist = "1"
+png = "0.17"
+base64 = "0.22"
+flate2 = "1"
+lzma-rs = "0.3"
+toml = "0.8"
+p256 = { version = "0.13", features = ["ecdsa", "pkcs8", "pem"] }
+rsa = { version = "0.9", features = ["sha2"] }
+sha2 = "0.10"
+rand = "0.8"
+ureq = { version = "2", features = ["json"] }
+zip = { version = "9", default-features = false, features = ["deflate"] }
+
+# RSA key generation is very slow unoptimised; keep tests fast.
+[profile.dev.package.num-bigint-dig]
+opt-level = 3
+[profile.dev.package.rsa]
+opt-level = 3

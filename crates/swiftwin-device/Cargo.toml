@@ -1,0 +1,16 @@
+[package]
+name = "swiftwin-device"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Device bridge for SwiftWin: the Device/Controller traits, MockDevice and RealDevice"
+
+[dependencies]
+swiftwin-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+plist.workspace = true
+png.workspace = true
+zip.workspace = true
+
+[dev-dependencies]

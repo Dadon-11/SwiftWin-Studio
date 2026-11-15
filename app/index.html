@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SwiftWin Studio</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body data-mode="code">
+    <!-- ============ Sign in (before anything else when signed out) ============ -->
+    <div id="signin" class="onboarding hidden">
+      <div class="ob-card auth-card" data-glass>
+        <div class="ob-main auth-main">
+          <div class="brand-row"><span class="logo"></span><span class="brand-name">SwiftWin Studio</span></div>
+          <h1 id="auth-title">Sign in</h1>
+          <p id="auth-sub" class="muted">Build and test SwiftUI apps on your real iPhone, right from Windows.</p>
+          <div id="auth-error" class="callout error hidden" role="alert"></div>
+          <div id="auth-body" class="auth-body"></div>
+          <button type="button" class="link-btn auth-skip" id="auth-skip">Continue without an account</button>
+          <p class="auth-legal muted">By continuing you agree to the <button type="button" class="link-btn" data-legal="terms">Terms</button>
+            and the <button type="button" class="link-btn" data-legal="privacy">Privacy Policy</button>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Home: start a project (after sign-in) ============ -->
+    <div id="home-screen" class="home hidden">
+      <header class="home-top">
+        <div class="brand"><span class="logo"></span><span class="brand-name">SwiftWin Studio</span></div>
+        <span class="grow"></span>
+        <button id="home-account" class="icon-btn lg-glass" title="Account" data-glass="bend press"><i data-icon="user"></i></button>
+      </header>
+      <main class="home-main">
+        <section class="home-hero" data-glass>
+          <p id="home-hello" class="home-hello"></p>
+          <h1>What do you want to build?</h1>
+          <p class="muted">SwiftUI apps on your real iPhone, right from Windows. iPhone apps only for now: iPad and Mac apps aren't supported yet.</p>
+          <div class="home-tiles">
+            <button class="home-tile" data-home="new" data-glass="press">
+              <span class="home-art new"><i data-icon="plus"></i></span>
+              <b>New project</b><span>Start from the Hello SwiftUI template</span>
+            </button>
+            <button class="home-tile" data-home="open" data-glass="press">
+              <span class="home-art open"><i data-icon="folder"></i></span>
+              <b>Open project</b><span>A folder with swiftwin.toml</span>
+            </button>
+          </div>
+        </section>
+        <section id="home-recent-wrap" class="home-recent-wrap hidden">
+          <div class="home-section-title">Recent projects</div>
+          <div id="home-recent" class="home-recent"></div>
+        </section>
+      </main>
+    </div>
+
+    <!-- ============ Connect the iPhone (after a project is open) ============ -->
+    <div id="onboarding" class="onboarding hidden">
+      <div class="ob-card connect-card" data-glass>
+        <div class="ob-main">
+          <div class="brand-row"><span class="logo"></span><span class="brand-name">SwiftWin Studio</span></div>
+          <h1>Let's run <span id="ob-project">your app</span> on your iPhone</h1>
+          <p class="muted">Three quick steps, and you only do them once.</p>
+          <ol class="ob-steps connect-steps">
+            <li id="step-usb"><span class="step-num">1</span><span class="step-dot"><i data-icon="plug"></i></span>
+              <div><b>Plug it in</b><span>Use a USB cable that carries data, and unlock the phone.</span></div></li>
+            <li id="step-trust"><span class="step-num">2</span><span class="step-dot"><i data-icon="shield"></i></span>
+              <div><b>Tap “Trust”</b><span>On the iPhone, then enter your passcode.</span></div></li>
+            <li id="step-dev"><span class="step-num">3</span><span class="step-dot"><i data-icon="toggle"></i></span>
+              <div><b>Developer Mode</b><span>Settings › Privacy &amp; Security › Developer Mode, then restart.</span></div></li>
+          </ol>
+          <div id="device-list" class="device-list"><div class="scanning"><span class="spinner"></span> Looking for iPhones…</div></div>
+          <div id="scan-error" class="callout error hidden"></div>
+          <div id="connect-error" class="callout error hidden"></div>
+          <div class="ob-actions">
+            <button id="use-mock" class="btn lg-glass" data-glass="bend press"><i data-icon="sparkles"></i>Try a simulated iPhone</button>
+            <span class="grow"></span>
+            <button id="ob-skip" class="link-btn">Skip for now — just write code</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ App ============ -->
+    <div id="app">
+      <header class="titlebar">
+        <button id="explorer-btn" class="icon-btn lg-glass code-only" title="Files" data-glass="bend press"><i data-icon="folder"></i></button>
+        <button id="brand-home" class="brand brand-btn" title="Home"><span class="logo"></span><span class="brand-name">SwiftWin Studio</span></button>
+        <div class="segmented" role="tablist" aria-label="Mode" data-glass="bend">
+          <button id="mode-code" class="seg active" role="tab" title="Code mode (Ctrl+Shift+A to switch)"><i data-icon="code"></i>Code</button>
+          <button id="mode-ai" class="seg" role="tab" title="AI mode: only the iPhone, watch your AI agent work (Ctrl+Shift+A)"><i data-icon="sparkles"></i>AI mode</button>
+        </div>
+        <button id="project-btn" class="project-btn code-only" title="Open or create a project" data-glass="bend press">
+          <i data-icon="folder"></i><span id="project-name">Open project…</span><i data-icon="chevronDown" class="dim"></i>
+        </button>
+        <span class="grow"></span>
+        <div class="code-only actions">
+          <button id="save" class="icon-btn" title="Save (Ctrl+S)" disabled data-glass="bend press"><i data-icon="save"></i></button>
+          <button id="build" class="btn" title="Build (Ctrl+B)" data-glass="bend press"><i data-icon="hammer"></i><span>Build</span></button>
+          <button id="run" class="btn primary" title="Build, sign, install and launch (Ctrl+R)" data-glass="press"><i data-icon="play"></i><span>Run</span></button>
+          <button id="upload-btn" class="btn" title="Upload this project to GitHub" data-glass="bend press"><i data-icon="upload"></i><span>Upload</span></button>
+        </div>
+        <button id="inspo-btn" class="btn" title="Inspo: take design inspiration from another app on your iPhone" data-glass="bend press"><i data-icon="palette"></i><span>Inspo</span></button>
+        <button id="account-btn" class="icon-btn" title="Account" data-glass="bend press"><i data-icon="user"></i></button>
+        <button id="doctor-btn" class="icon-btn" title="Doctor: check USB, trust, Developer Mode, signing…" data-glass="bend press"><i data-icon="pulse"></i></button>
+      </header>
+
+      <aside id="sidebar" class="code-only panel" data-glass>
+        <div class="pane-head"><span>Explorer</span></div>
+        <div id="tree-root" class="file-tree">
+          <div class="empty-mini">
+            <p>No project open.</p>
+            <button class="btn small" data-action="new-project"><i data-icon="plus"></i>New project</button>
+            <button class="btn small ghost" data-action="open-project"><i data-icon="folder"></i>Open…</button>
+          </div>
+        </div>
+      </aside>
+
+      <main id="work" class="code-only">
+        <div id="editor-card" class="panel" data-glass>
+        <div id="tabs" class="tabs"></div>
+        <div id="editor-wrap">
+          <div id="editor"></div>
+          <div id="welcome" class="welcome">
+            <div class="welcome-inner">
+              <h2>Start building</h2>
+              <p class="muted">SwiftUI on your iPhone, from Windows.</p>
+              <div class="welcome-actions">
+                <button class="tile" data-glass="press" data-action="new-project"><i data-icon="plus"></i><b>New project</b><span>Hello SwiftUI template</span></button>
+                <button class="tile" data-glass="press" data-action="open-project"><i data-icon="folder"></i><b>Open project</b><span>A folder with swiftwin.toml</span></button>
+                <button class="tile" data-glass="press" data-action="ai-mode"><i data-icon="sparkles"></i><b>AI mode</b><span>Let your AI agent drive, watch the phone</span></button>
+              </div>
+              <div id="recent" class="recent"></div>
+              <div class="shortcuts">
+                <span><kbd>Ctrl</kbd><kbd>R</kbd> Run</span><span><kbd>Ctrl</kbd><kbd>B</kbd> Build</span>
+                <span><kbd>Ctrl</kbd><kbd>S</kbd> Save</span><span><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>A</kbd> AI mode</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="resizer h" id="resize-bottom" title="Drag to resize"></div>
+        <section id="bottom" class="panel" data-glass>
+          <div class="pane-head tabs-head">
+            <button class="ptab active" data-panel="logs">Logs <span id="log-count" class="count"></span></button>
+            <button class="ptab" data-panel="activity"><span class="long">AI activity</span><span class="short">Activity</span> <span id="act-count" class="count"></span></button>
+            <span class="grow"></span>
+            <div class="log-tools">
+              <input id="log-filter" placeholder="Filter logs…" spellcheck="false" />
+              <select id="log-level" title="Minimum level">
+                <option value="all">All levels</option><option value="notice">Notice+</option><option value="error">Errors</option>
+              </select>
+              <button id="log-follow" class="icon-btn toggled" title="Auto-scroll"><i data-icon="down"></i></button>
+              <button id="log-clear" class="icon-btn" title="Clear"><i data-icon="trash"></i></button>
+            </div>
+          </div>
+          <div id="log-list" class="log-list panel-body"></div>
+          <div id="activity-list" class="activity-list panel-body hidden"></div>
+        </section>
+      </main>
+
+      <div class="resizer v code-only" id="resize-phone" title="Drag to resize"></div>
+
+      <!-- AI mode: connect your own AI agent (Claude Code or Codex) to this phone through `swiftwin mcp`. -->
+      <section id="ai-connect" class="panel ai-only" data-glass>
+        <div class="connect-body">
+          <div class="ai-wait-title">Connect your AI agent</div>
+          <p class="muted">Run one command once in a terminal, then ask your agent to build, run or test your app: it drives this iPhone while you watch.</p>
+          <div class="agent">
+            <p class="dim">Claude Code</p>
+            <div class="cmd" data-glass="bend"><code id="cmd-claude">claude mcp add swiftwin -- swiftwin mcp</code><button class="icon-btn" data-copy="cmd-claude" title="Copy"><i data-icon="copy"></i></button></div>
+          </div>
+          <div class="agent">
+            <p class="dim">OpenAI Codex</p>
+            <div class="cmd" data-glass="bend"><code id="cmd-codex">codex mcp add swiftwin -- swiftwin mcp</code><button class="icon-btn" data-copy="cmd-codex" title="Copy"><i data-icon="copy"></i></button></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="phone-pane" class="panel" data-glass>
+        <div class="phone-bar">
+          <button id="ai-exit" class="btn small ghost ai-only" title="Back to code (Esc)"><i data-icon="arrowLeft"></i>Code</button>
+          <span id="phone-title" class="phone-title"><span class="dot off"></span>No iPhone</span>
+          <span id="phone-sub" class="phone-sub"></span>
+          <span class="grow"></span>
+          <span id="mirror-pill" class="pill">—</span>
+          <select id="mirror-mode" class="small-select" title="Mirroring source">
+            <option value="auto">Auto</option><option value="video">Video</option><option value="usb">Screenshots</option>
+          </select>
+          <button id="snap" class="icon-btn" title="Save screenshot"><i data-icon="camera"></i></button>
+          <button id="toggle-tree" class="icon-btn code-only" title="UI elements on screen"><i data-icon="tree"></i></button>
+        </div>
+        <!-- "AI agent is using this device" while it works, else what it did last. -->
+        <div class="ai-presence-row ai-only">
+          <div id="ai-last" class="ai-presence hidden"><span class="rec-dot"></span><span id="ai-text"></span><span id="ai-when" class="dim"></span></div>
+        </div>
+        <div id="phone-stage" class="phone-stage" tabindex="0">
+          <!-- iPhone 17 Pro-like: titanium rim, black bezel, the screen with its Dynamic Island. -->
+          <div id="device" class="device">
+            <div class="device-bezel">
+              <div class="device-screen">
+                <img id="screen" alt="iPhone screen" draggable="false" />
+                <div class="island" aria-hidden="true"></div>
+                <div id="fx-layer" class="fx-layer" aria-hidden="true">
+                  <svg id="claude-cursor" class="claude-cursor off" viewBox="0 0 24 24"><path d="M5 3l14.5 7.6-6.3 1.7-3.4 5.9z" /></svg>
+                </div>
+                <div id="no-screen" class="no-screen"><span id="no-screen-spin" class="spinner"></span><span id="no-screen-text">Waiting for the screen…</span>
+                  <button id="connect-phone" class="btn primary small hidden"><i data-icon="plug"></i>Connect iPhone</button></div>
+              </div>
+            </div>
+          </div>
+          <pre id="tree" class="tree-panel hidden"></pre>
+        </div>
+        <div class="phone-foot">
+          <div class="dev-toolbar" data-glass="bend">
+            <button id="home" class="tool-btn" title="Home"><i data-icon="home"></i></button>
+            <button id="tb-snap" class="tool-btn ai-only" title="Save screenshot"><i data-icon="camera"></i></button>
+            <button id="tb-run" class="tool-btn ai-only" title="Build and run the project (Ctrl+R)"><i data-icon="play"></i></button>
+            <button id="tb-exit" class="tool-btn ai-only" title="Back to code (Esc)"><i data-icon="code"></i></button>
+            <!-- Phone-only page (phone window, Claude's Browser pane). -->
+            <button id="pv-inspo" class="tool-btn phone-only" title="Inspo: design ideas from an app on your phone"><i data-icon="palette"></i></button>
+            <button id="pv-setup" class="tool-btn phone-only" title="Signing and phone control"><i data-icon="shield"></i></button>
+            <button id="pv-studio" class="tool-btn phone-only" title="Open SwiftWin Studio"><i data-icon="external"></i></button>
+            <button id="pv-account" class="tool-btn phone-only" title="Account"><i data-icon="user"></i></button>
+          </div>
+          <span class="hint code-only">Click to tap · Drag to swipe · Scroll · Type</span>
+        </div>
+      </section>
+
+      <footer id="statusbar" data-glass="bend">
+        <span id="sb-device"><span class="dot off"></span>No iPhone</span>
+        <span id="sb-mirror"></span>
+        <span id="sb-claude" class="sb-claude hidden"><i data-icon="sparkles"></i><span></span></span>
+        <span class="grow"></span>
+        <span id="sb-msg"></span>
+      </footer>
+    </div>
+    <div id="toasts" class="toasts"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+[package]
+name = "swiftwin-account"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "SwiftWin accounts (Supabase Auth: email + password, Google, GitHub) and GitHub project upload"
+
+[dependencies]
+swiftwin-core.workspace = true
+swiftwin-signer.workspace = true
+swiftwin-release.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+ureq.workspace = true
+rand.workspace = true
+sha2.workspace = true
+base64.workspace = true
+sha1 = "0.10"
+url = "2"
+ignore = "0.4"
+open = "5"

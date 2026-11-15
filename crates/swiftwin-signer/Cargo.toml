@@ -1,0 +1,22 @@
+[package]
+name = "swiftwin-signer"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Apple developer services (certificates, App IDs, devices, profiles) and code signing for SwiftWin"
+
+[dependencies]
+swiftwin-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+plist.workspace = true
+zip.workspace = true
+ureq.workspace = true
+p256.workspace = true
+rsa.workspace = true
+sha2.workspace = true
+rand.workspace = true
+base64.workspace = true
+
+[target.'cfg(windows)'.dependencies]
+keyring = { version = "3", features = ["windows-native"] }

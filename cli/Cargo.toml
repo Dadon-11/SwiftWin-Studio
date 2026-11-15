@@ -1,0 +1,34 @@
+[package]
+name = "swiftwin-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "The `swiftwin` command line"
+
+[[bin]]
+name = "swiftwin"
+path = "src/main.rs"
+
+[dependencies]
+swiftwin-core.workspace = true
+swiftwin-device.workspace = true
+swiftwin-control.workspace = true
+swiftwin-sdk.workspace = true
+swiftwin-builder.workspace = true
+swiftwin-signer.workspace = true
+swiftwin-workflow.workspace = true
+swiftwin-doctor.workspace = true
+swiftwin-mirror.workspace = true
+swiftwin-mcp.workspace = true
+swiftwin-app-core.workspace = true
+swiftwin-release.workspace = true
+swiftwin-account.workspace = true
+rpassword = "7"
+serde.workspace = true
+serde_json.workspace = true
+clap.workspace = true
+anyhow.workspace = true
+ureq.workspace = true
+
+[dev-dependencies]
+zip.workspace = true

@@ -1,0 +1,19 @@
+[package]
+name = "swiftwin-release"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Cloud release for SwiftWin: TestFlight builds on a macOS GitHub Actions runner with Xcode 26"
+
+[dependencies]
+swiftwin-core.workspace = true
+swiftwin-builder.workspace = true
+swiftwin-signer.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+ureq.workspace = true
+crypto_box = { version = "0.9", features = ["seal", "std"] }
+rand.workspace = true
+
+[dev-dependencies]
+serde_yaml = "0.9"
