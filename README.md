@@ -176,6 +176,19 @@ welcome ([docs/testing-checklist.md](docs/testing-checklist.md)).
 - [docs/progress.md](docs/progress.md), [docs/open-questions.md](docs/open-questions.md): what was tried, what's unverified
 - [CONTRIBUTING.md](CONTRIBUTING.md): how to contribute
 
+## Code signing policy
+
+Releases are built from this repository. We have applied to the [SignPath Foundation](https://signpath.org)
+for free code signing for open-source projects; once accepted, Windows installers are signed with free code
+signing provided by [SignPath.io](https://signpath.io), certificate by SignPath Foundation. Until then the
+installer is not code-signed: Windows may show "Windows protected your PC" (More info → Run anyway). Each
+release lists the installer's SHA-256 so you can check your download, and
+`winget install SwiftWin.SwiftWin` installs it without that warning once the package is published.
+
+- Committer, reviewer and release approver: Yoav Dadon ([@Dadon-11](https://github.com/Dadon-11)). Changes
+  written with AI assistance (Claude) are reviewed and approved by the maintainer before release.
+- Privacy: SwiftWin sends no analytics; see [PRIVACY.md](PRIVACY.md) for the optional account.
+
 ## Author
 
 Made by Yoav Dadon ([@Dadon-11](https://github.com/Dadon-11)), with
