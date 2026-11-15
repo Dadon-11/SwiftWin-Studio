@@ -757,7 +757,10 @@ function nameEditor(body, u) {
     const i = f.querySelector("input");
     i.focus();
     i.select();
-    i.onkeydown = (e) => e.key === "Escape" && (e.stopPropagation(), show());
+    // A block body: an onkeydown handler that returns false cancels the key (nothing could be typed).
+    i.onkeydown = (e) => {
+      if (e.key === "Escape") (e.stopPropagation(), show());
+    };
     f.querySelector("#acct-name-cancel").onclick = show;
     f.onsubmit = async (e) => {
       e.preventDefault();

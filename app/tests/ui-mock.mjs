@@ -372,7 +372,9 @@ check((await page.textContent("#acct-plan")).includes("Free plan"), "Account sho
 check((await page.textContent("#acct-method")).includes("Email") && (await page.textContent("#acct-verified")).includes("Verified") && (await page.textContent("#acct-since")).includes("2026"),
   "Account shows the sign-in method, email verification and member since");
 await page.click("#acct-edit-name");
-await page.fill("#acct-name-input", "Ada Lovelace");
+await page.fill("#acct-name-input", "");
+await page.type("#acct-name-input", "Ada Lovelace"); // real key presses, not fill(): a cancelled keydown once blocked typing here
+check((await page.inputValue("#acct-name-input")) === "Ada Lovelace", "the name field takes typed keys");
 await page.click("#acct-name-save");
 await page.waitForFunction(() => document.getElementById("acct-name")?.textContent === "Ada Lovelace");
 check((await page.textContent("#acct-avatar .avatar")) === "AL", "the name can be changed, and the initials follow");
