@@ -1,13 +1,11 @@
 <p align="center">
   <a href="https://dadon-11.github.io/SwiftWin-Studio/">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-dark.svg">
-      <img src="docs/readme/hero-light.svg" width="960" alt="SwiftWin Studio: iPhone apps, built on Windows. 0 Macs needed, 4 s to compile an edit, 27 s from edit to iPhone, 23 fps live mirror.">
+      <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-dark.png">
+      <img src="docs/readme/hero-light.png" width="960" alt="SwiftWin Studio: iPhone apps, built on Windows. 0 Macs needed, 4 s to compile an edit, 27 s from edit to iPhone, 23 fps live mirror.">
     </picture>
   </a>
 </p>
-
-<p align="center"><i>Plug in your iPhone. Write SwiftUI. Press Run. No Mac.</i></p>
 
 <p align="center">
   <a href="https://github.com/Dadon-11/SwiftWin-Studio/releases/latest"><img src="https://img.shields.io/github/v/release/Dadon-11/SwiftWin-Studio?style=flat-square&label=release&color=555" alt="Latest release"></a>
@@ -43,8 +41,8 @@ through it and read the logs.
 <p align="center">
   <a href="https://dadon-11.github.io/SwiftWin-Studio/#speed">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="docs/readme/numbers-dark.svg">
-      <img src="docs/readme/numbers-light.svg" width="960" alt="Fast enough to forget about: first build 301 s once; edit to running on the iPhone 27 s; compile after an edit 4 s.">
+      <source media="(prefers-color-scheme: dark)" srcset="docs/readme/numbers-dark.png">
+      <img src="docs/readme/numbers-light.png" width="960" alt="Fast enough to forget about: compile after an edit 4 s; edit to running on the iPhone 27 s; first build about 5 minutes, once.">
     </picture>
   </a>
 </p>
@@ -52,8 +50,8 @@ through it and read the logs.
 <p align="center">
   <a href="https://github.com/sponsors/Dadon-11">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="docs/readme/sponsor-dark.svg">
-      <img src="docs/readme/sponsor-light.svg" width="960" alt="Like SwiftWin? Sponsor the project">
+      <source media="(prefers-color-scheme: dark)" srcset="docs/readme/sponsor-dark.png">
+      <img src="docs/readme/sponsor-light.png" width="960" alt="Like SwiftWin? Sponsor the project">
     </picture>
   </a>
 </p>

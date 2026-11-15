@@ -1,0 +1,132 @@
+<!doctype html>
+<!-- The README's picture cards. scripts/readme-cards.mjs renders each .card to docs/readme/<id>-<theme>.png.
+     Open it in a browser with ?theme=dark to preview. Numbers are real measurements: update them when they change. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+    --text: #0b1b33; --dim: #4f6280; --faint: #8193ad;
+    --base: #e9f1fc;
+    --mesh: radial-gradient(60% 80% at 8% 0%, #8cc3ff 0%, transparent 60%),
+            radial-gradient(50% 70% at 92% 10%, #c6e2ff 0%, transparent 65%),
+            radial-gradient(70% 70% at 75% 110%, #6fb4ff 0%, transparent 60%),
+            radial-gradient(60% 60% at 15% 115%, #d5f0ff 0%, transparent 60%);
+    --glass: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.46));
+    --glass-line: rgba(255,255,255,.95); --glass-edge: rgba(20,60,120,.10);
+    --shadow: 0 1px 0 rgba(255,255,255,.95) inset, 0 -1px 0 rgba(20,60,120,.05) inset, 0 18px 40px -18px rgba(20,70,150,.35);
+    --accent: linear-gradient(135deg, #1f6bff, #22b8ff);
+    --track: rgba(20,60,120,.09);
+  }
+  .dark {
+    --text: #f2f7ff; --dim: #9fb3cf; --faint: #6c809c;
+    --base: #050b16;
+    --mesh: radial-gradient(60% 80% at 8% 0%, #0f3f9e 0%, transparent 62%),
+            radial-gradient(50% 70% at 95% 5%, #0b2a63 0%, transparent 65%),
+            radial-gradient(70% 70% at 75% 115%, #0a5fc4 0%, transparent 58%),
+            radial-gradient(60% 60% at 10% 120%, #07345e 0%, transparent 60%);
+    --glass: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+    --glass-line: rgba(255,255,255,.16); --glass-edge: rgba(0,0,0,.4);
+    --shadow: 0 1px 0 rgba(255,255,255,.14) inset, 0 24px 50px -22px rgba(0,0,0,.9);
+    --accent: linear-gradient(135deg, #2f7bff, #3ccbff);
+    --track: rgba(255,255,255,.08);
+  }
+  html, body { margin: 0; background: transparent; }
+  body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: antialiased; padding: 20px; display: grid; gap: 30px; justify-content: start; }
+
+  .card { position: relative; overflow: hidden; border-radius: 30px; background: var(--base); isolation: isolate; }
+  .card::before { content: ""; position: absolute; inset: 0; background: var(--mesh); z-index: -1; }
+  .card::after { content: ""; position: absolute; inset: 0; border-radius: 30px; box-shadow: inset 0 0 0 1px var(--glass-edge); pointer-events: none; }
+
+  .glass { background: var(--glass); border: 1px solid var(--glass-line); box-shadow: var(--shadow);
+           backdrop-filter: blur(26px) saturate(170%); -webkit-backdrop-filter: blur(26px) saturate(170%); }
+  .caps { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+  .grad { background: var(--accent); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* Hero: words on the left, the real app behind frosted glass on the right. */
+  #hero { width: 960px; height: 460px; }
+  #hero .shot { position: absolute; left: 470px; top: 70px; width: 620px; border-radius: 16px; box-shadow: 0 30px 60px -20px rgba(10,40,90,.55); }
+  #hero .veil { position: absolute; left: 430px; top: 286px; width: 300px; padding: 16px 18px; border-radius: 20px; display: flex; gap: 14px; align-items: center; }
+  :root:not(.dark) #hero .veil { background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.74)); }
+  #hero .veil .dot { width: 38px; height: 38px; border-radius: 12px; background: var(--accent); display: grid; place-items: center; color: #fff; font-size: 16px; flex: none; }
+  #hero .veil b { display: block; font-size: 15px; letter-spacing: -.01em; }
+  #hero .veil span { font-size: 13px; color: var(--dim); }
+  #hero .left { position: absolute; left: 56px; top: 62px; width: 400px; }
+  #hero .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
+  #hero .brand img { width: 46px; height: 46px; border-radius: 12px; box-shadow: 0 8px 18px -8px rgba(20,80,200,.6); }
+  #hero h1 { font-size: 50px; line-height: 1.04; letter-spacing: -.035em; font-weight: 700; margin: 0; }
+  #hero p { font-size: 17px; line-height: 1.5; color: var(--dim); margin: 18px 0 0; max-width: 340px; }
+  #hero .stats { position: absolute; left: 56px; bottom: 50px; display: flex; border-radius: 22px; padding: 6px; }
+  #hero .stat { padding: 10px 20px; }
+  #hero .stat + .stat { border-left: 1px solid var(--track); }
+  #hero .stat b { display: block; font-size: 24px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  #hero .stat span { font-size: 12px; color: var(--dim); }
+
+  /* Speed: one statement, three bars. */
+  #numbers { width: 960px; height: 300px; }
+  #numbers .panel { position: absolute; inset: 28px; border-radius: 24px; display: grid; grid-template-columns: 330px 1fr; align-items: center; padding: 0 40px; gap: 40px; }
+  #numbers h2 { font-size: 34px; line-height: 1.1; letter-spacing: -.03em; font-weight: 700; margin: 10px 0 10px; }
+  #numbers .note { font-size: 13px; color: var(--dim); }
+  #numbers .rows { display: grid; gap: 20px; }
+  #numbers .row { display: grid; grid-template-columns: 1fr 60px; gap: 8px 14px; align-items: center; }
+  #numbers .row span { grid-column: 1 / -1; font-size: 14px; font-weight: 500; color: var(--text); }
+  #numbers .track { height: 10px; border-radius: 99px; background: var(--track); overflow: hidden; }
+  #numbers .fill { height: 100%; border-radius: 99px; background: var(--accent); }
+  #numbers .fill.mute { background: var(--faint); opacity: .55; }
+  #numbers .row b { font-size: 15px; text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Sponsor: a slim glass banner. */
+  #sponsor { width: 960px; height: 150px; }
+  #sponsor .panel { position: absolute; inset: 24px; border-radius: 22px; display: flex; align-items: center; gap: 18px; padding: 0 26px; }
+  #sponsor .heart { width: 50px; height: 50px; border-radius: 15px; background: var(--accent); display: grid; place-items: center; color: #fff; font-size: 22px; flex: none; }
+  #sponsor b { display: block; font-size: 21px; letter-spacing: -.02em; }
+  #sponsor span { font-size: 14px; color: var(--dim); }
+  #sponsor .btn { margin-left: auto; background: var(--accent); color: #fff; font-weight: 600; font-size: 15px; padding: 12px 24px; border-radius: 99px; box-shadow: 0 10px 22px -10px #1f6bff; }
+</style>
+</head>
+<body>
+
+<div class="card" id="hero">
+  <img class="shot" src="../docs/screenshots/code-mode.png" alt="">
+  <div class="left">
+    <div class="brand"><img src="../app/src-tauri/icons/128x128@2x.png" alt=""><div class="caps">SwiftWin Studio</div></div>
+    <h1>iPhone apps.<br><span class="grad">Built on Windows.</span></h1>
+    <p>Write SwiftUI, press Run, and it's on your real iPhone. No Mac.</p>
+  </div>
+  <div class="veil glass"><div class="dot">▶</div><div><b>Running on iPhone</b><span>27 s from edit to phone</span></div></div>
+  <div class="stats glass">
+    <div class="stat"><b>0</b><span>Macs needed</span></div>
+    <div class="stat"><b>4 s</b><span>to compile</span></div>
+    <div class="stat"><b>23 fps</b><span>live mirror</span></div>
+  </div>
+</div>
+
+<div class="card" id="numbers">
+  <div class="panel glass">
+    <div>
+      <div class="caps">Speed</div>
+      <h2>Fast enough to forget about.</h2>
+      <div class="note">A recent iPhone, iOS 27, Windows 11.</div>
+    </div>
+    <div class="rows">
+      <div class="row"><span>Compile after an edit</span><div class="track"><div class="fill" style="width:2%"></div></div><b>4 s</b></div>
+      <div class="row"><span>Edit → running on iPhone</span><div class="track"><div class="fill" style="width:9%"></div></div><b>27 s</b></div>
+      <div class="row"><span>First build, once</span><div class="track"><div class="fill mute" style="width:100%"></div></div><b>5 min</b></div>
+    </div>
+  </div>
+</div>
+
+<div class="card" id="sponsor">
+  <div class="panel glass">
+    <div class="heart">♥</div>
+    <div><b>Like SwiftWin?</b><span>Sponsoring keeps it free and open source.</span></div>
+    <div class="btn">Sponsor</div>
+  </div>
+</div>
+
+<script>
+  if (new URLSearchParams(location.search).get("theme") === "dark") document.documentElement.classList.add("dark");
+</script>
+</body>
+</html>
