@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title }} · SwiftWin</title>
+<link rel="icon" href="{{ '/assets/icon.png' | relative_url }}">
+<style>
+  :root { --bg: #07080b; --line: #1d2027; --text: #eef1f6; --dim: #8a92a0; --cyan: #7cc4ff;
+          --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, Menlo, monospace;
+          --sans: -apple-system, "Segoe UI", system-ui, Helvetica, Arial, sans-serif; }
+  body { margin: 0; background: var(--bg); color: #c6ccd6; font: 16px/1.7 var(--sans); -webkit-font-smoothing: antialiased; }
+  header { border-bottom: 1px solid var(--line); padding: 18px 22px; }
+  header a { font: 700 14px var(--mono); color: var(--text); text-decoration: none; }
+  header a i { display: inline-block; width: 8px; height: 15px; background: var(--cyan); vertical-align: -2px; margin-left: 6px; }
+  main { max-width: 760px; margin: 0 auto; padding: 50px 22px 90px; }
+  h1, h2, h3 { color: var(--text); font-family: var(--mono); letter-spacing: -.01em; line-height: 1.2; }
+  h1 { font-size: 38px; margin-top: 0; }
+  h2 { font-size: 22px; margin-top: 2.2em; }
+  a { color: var(--cyan); }
+  strong { color: var(--text); }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { color: var(--text); }
+  code { font-family: var(--mono); font-size: .9em; background: #12151b; padding: 2px 5px; border-radius: 4px; }
+  footer { border-top: 1px solid var(--line); padding: 30px 22px; text-align: center; font: 13px var(--mono); color: var(--dim); }
+  footer a { color: var(--dim); margin: 0 8px; text-decoration: none; }
+</style>
+</head>
+<body>
+<header><a href="{{ '/' | relative_url }}">swiftwin<i></i></a></header>
+<main>{{ content }}</main>
+<footer>
+  <a href="{{ '/' | relative_url }}">Home</a>
+  <a href="{{ '/privacy/' | relative_url }}">Privacy</a>
+  <a href="{{ '/terms/' | relative_url }}">Terms</a>
+  <a href="https://github.com/Dadon-11/SwiftWin-Studio">GitHub</a>
+</footer>
+</body>
+</html>

@@ -321,7 +321,7 @@ Set it up once, from the Claude desktop app's Terminal panel (it installs SwiftW
 `claude-plugin/swiftwin-phone`, which opens the pane for Claude):
 
 ```
-claude plugin marketplace add C:\Users\<you>\Desktop\THENDER-WORK\claude-plugin
+claude plugin marketplace add <folder where you cloned SwiftWin-Studio>\claude-plugin
 claude plugin install swiftwin-phone@swiftwin
 ```
 

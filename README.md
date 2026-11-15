@@ -4,33 +4,59 @@
 
 <h1 align="center">SwiftWin Studio</h1>
 
+<p align="center"><i>Plug in your iPhone. Write SwiftUI. Press Run. No Mac.</i></p>
+
 <p align="center">
-  <b>Build, run and test SwiftUI iPhone apps on Windows, on your real iPhone, with no Mac.</b><br>
-  And let Claude Code or Codex do it too.
+  <a href="https://github.com/Dadon-11/SwiftWin-Studio/releases/latest"><img src="https://img.shields.io/github/v/release/Dadon-11/SwiftWin-Studio?style=flat-square&label=release&color=555" alt="Latest release"></a>
+  <a href="https://github.com/Dadon-11/SwiftWin-Studio/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Dadon-11/SwiftWin-Studio/ci.yml?branch=main&style=flat-square&label=ci" alt="CI"></a>
+  <img src="https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20Codex-555?style=flat-square" alt="Works with Claude Code and Codex">
+  <img src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-555?style=flat-square" alt="Windows 10 and 11">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/Dadon-11/SwiftWin-Studio?style=flat-square&color=555" alt="MIT license"></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Dadon-11/SwiftWin-Studio/releases/latest"><img src="https://img.shields.io/github/v/release/Dadon-11/SwiftWin-Studio?label=release&color=1f6feb" alt="Latest release"></a>
-  <a href="https://github.com/Dadon-11/SwiftWin-Studio/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Dadon-11/SwiftWin-Studio/ci.yml?branch=main&label=ci" alt="CI"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/Dadon-11/SwiftWin-Studio?color=2ea043" alt="MIT license"></a>
-  <img src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6" alt="Windows 10 and 11">
-  <a href="https://github.com/Dadon-11/SwiftWin-Studio/releases"><img src="https://img.shields.io/github/downloads/Dadon-11/SwiftWin-Studio/total?color=8957e5" alt="Downloads"></a>
+  <a href="https://github.com/Dadon-11/SwiftWin-Studio/releases/latest"><img src="docs/readme/hero.svg" width="960" alt="SwiftWin 0.1: SwiftUI iPhone apps, built and run from Windows. 0 Macs needed, 23 fps live mirror, 4 s rebuild, 20+ AI tools."></a>
 </p>
 
 <p align="center">
+  <b>SwiftWin: your iPhone, your Windows PC, and nothing else.</b><br>
+  Build, sign, install and run SwiftUI apps on a real iPhone over USB, and let Claude Code or Codex drive it.<br>
   <a href="https://github.com/Dadon-11/SwiftWin-Studio/releases/latest"><b>Download</b></a> ·
+  <a href="https://dadon-11.github.io/SwiftWin-Studio/">Website</a> ·
   <a href="docs/first-run.md">First run</a> ·
   <a href="#use-it-with-claude-code-or-codex">Claude Code &amp; Codex</a> ·
-  <a href="CHANGELOG.md">Changelog</a> ·
-  <a href="CONTRIBUTING.md">Contributing</a>
+  <a href="CHANGELOG.md">Changelog</a>
 </p>
 
-SwiftWin compiles your SwiftUI app with the open-source Swift toolchain, signs it with your Apple ID,
-installs it on the iPhone plugged into your PC over USB, and shows the phone live on your screen,
-where a click is a tap. Claude Code gets the same powers through SwiftWin's MCP server: it can edit
-your app, run it on the phone, look at the screen, tap through it and read the logs.
+---
 
 ![SwiftWin Studio: code, logs and the live iPhone](docs/screenshots/code-mode.png)
+
+## Already built with SwiftWin
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/readme/tempo.png" width="72" height="72" alt="Tempo app icon"><br><b>Tempo</b></td>
+  </tr>
+</table>
+
+Made something with SwiftWin? [Open an issue](https://github.com/Dadon-11/SwiftWin-Studio/issues/new/choose)
+with its name and icon and it goes here.
+
+You know the problem. You want to make an iPhone app, you have a good Windows PC and an iPhone, and
+every guide starts with "first, buy a Mac". SwiftWin skips that step: it compiles your SwiftUI app with
+the open-source Swift toolchain, signs it with your Apple ID, installs it on the iPhone plugged into your
+PC, and shows the phone live on your screen, where a click is a tap. Claude Code and Codex get the same
+powers through SwiftWin's MCP server: they edit your app, run it on the phone, look at the screen, tap
+through it and read the logs.
+
+## Numbers
+
+<p align="center"><img src="docs/readme/numbers.svg" width="960" alt="First build 301 s once; edit to running on the iPhone 27 s; compile after an edit 4 s; mirror 23 fps over USB."></p>
+
+<p align="center">
+  <a href="https://github.com/sponsors/Dadon-11"><img src="docs/readme/sponsor.svg" width="960" alt="Like SwiftWin? Sponsor the project"></a>
+</p>
 
 ## Features
 
