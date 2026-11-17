@@ -127,6 +127,8 @@ tap 'Tap me' three times and check the logs."* In the Claude desktop app, instal
 `swiftwin-phone` plugin so the live iPhone opens beside the chat by itself; see
 [first-run.md, "Working in the Claude Code app"](docs/first-run.md#working-in-the-claude-code-app-with-a-phone-window).
 
+To use it as UI tests (launch, tap through, check what is on screen), see [docs/testing.md](docs/testing.md).
+
 Both agents ask before tool calls unless you allow them in their own settings; see
 [docs/security.md](docs/security.md). AI mode in SwiftWin Studio shows these commands with copy buttons
 and shows the agent's taps and swipes live on the phone.
