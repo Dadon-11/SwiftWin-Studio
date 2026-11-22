@@ -59,6 +59,10 @@ from the Microsoft Store, or install each item by hand from the link in its FAIL
 **Use the web iTunes, not the Store apps.** Free Apple ID signing (plumesign) doesn't work with the
 Microsoft Store's Apple Devices or iTunes. If one is installed, uninstall it before **Set up everything**.
 
+If iTunes (from apple.com) is installed but **Set up this PC** still shows "TO DO" for Apple's USB service,
+press **iTunes is already installed: choose its folder** and pick the folder that holds
+`AppleMobileDeviceService.exe`, usually `C:\Program Files\Common Files\Apple\Mobile Device Support`.
+
 ### A5. (Optional) the same by hand
 If you'd rather not use winget: iTunes from https://www.apple.com/itunes/, Python from python.org, Swift
 6.2.4 from https://www.swift.org/install/windows/, LLVM from https://github.com/llvm/llvm-project/releases,

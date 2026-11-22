@@ -48,6 +48,25 @@ impl SetupUi {
                 Ok(self.state((!running).then(|| setup::status(self.env.as_ref()))))
             }
             "setup_job" => Ok(self.state(None)),
+            // "Choose the folder myself": for when iTunes is installed but SwiftWin can't find it.
+            "setup_choose_apple_dir" => {
+                if self.fake.is_some() {
+                    return Err(SwiftWinError::invalid("the simulated PC has nothing to choose"));
+                }
+                let Some(picked) = pick_folder("Choose the folder that has AppleMobileDeviceService.exe")? else {
+                    return Ok(json!({"cancelled": true}));
+                };
+                let found = setup::apple_support_folder(&picked).ok_or_else(|| {
+                    SwiftWinError::invalid(format!(
+                        "{} has no AppleMobileDeviceService.exe. It is usually in C:\\Program Files\\Common Files\\Apple\\Mobile Device Support (or the same folder under Program Files (x86))",
+                        picked.display()
+                    ))
+                })?;
+                let mut c = swiftwin_core::config::Config::load();
+                c.apple_support_dir = Some(found.display().to_string());
+                c.save()?;
+                Ok(json!({"path": found.display().to_string()}))
+            }
             "setup_run" => {
                 {
                     let mut j = self.job.lock().unwrap();
@@ -125,6 +144,20 @@ impl SetupUi {
             };
         });
     }
+}
+
+/// Windows' own "choose a folder" window, through PowerShell, so no extra dependency is needed.
+/// `None` when the person cancels. The window is owned by a top-most form so it can't hide behind SwiftWin.
+// UNTESTED-ON-DEVICE: only the folder checks are unit-tested; the window needs a click.
+fn pick_folder(title: &str) -> Result<Option<std::path::PathBuf>> {
+    let script = format!(
+        "Add-Type -AssemblyName System.Windows.Forms; $o = New-Object System.Windows.Forms.Form -Property @{{TopMost=$true}}; \
+         $d = New-Object System.Windows.Forms.FolderBrowserDialog; $d.Description = '{title}'; $d.ShowNewFolderButton = $false; \
+         if ($d.ShowDialog($o) -eq 'OK') {{ $d.SelectedPath }}"
+    );
+    let out = swiftwin_device::real::pmd::command("powershell").args(["-NoProfile", "-STA", "-Command", &script]).output()?;
+    let path = String::from_utf8_lossy(&out.stdout).trim().to_string();
+    Ok((!path.is_empty()).then(|| path.into()))
 }
 
 /// The page Apple's sign-in returns to: it sets the download cookie and starts the Xcode download.

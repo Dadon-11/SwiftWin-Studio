@@ -199,6 +199,20 @@ pub fn get_sdk(
     Ok(info)
 }
 
+/// Is Apple's "Mobile Device Support" (iTunes' USB driver) under any "Common Files" folder? iTunes
+/// puts it under the 64-bit one on most PCs but the 32-bit one on others, so every one is checked.
+/// `chosen` is a folder the user picked by hand (see [`apple_support_folder`]).
+fn apple_support_installed(common_files: &[Option<std::ffi::OsString>], chosen: Option<&Path>) -> bool {
+    common_files.iter().flatten().any(|c| PathBuf::from(c).join("Apple").join("Mobile Device Support").is_dir())
+        || chosen.is_some_and(|c| apple_support_folder(c).is_some())
+}
+
+/// The folder with `AppleMobileDeviceService.exe`, given the folder a user picked: it, or the
+/// "Mobile Device Support" folder inside it (so picking the parent "Apple" folder works too).
+pub fn apple_support_folder(picked: &Path) -> Option<PathBuf> {
+    [picked.to_path_buf(), picked.join("Mobile Device Support")].into_iter().find(|d| d.join("AppleMobileDeviceService.exe").is_file())
+}
+
 /// The real PC.
 #[derive(Default)]
 pub struct RealSetupEnv;
@@ -214,9 +228,8 @@ impl SetupEnv for RealSetupEnv {
         match id {
             "apple" => {
                 let mux = swiftwin_device::real::usbmux::Usbmux::platform().list_devices().is_ok();
-                let amds = std::env::var_os("CommonProgramFiles")
-                    .map(|c| PathBuf::from(c).join("Apple").join("Mobile Device Support"))
-                    .is_some_and(|p| p.is_dir());
+                let chosen = Config::load().apple_support_dir;
+                let amds = apple_support_installed(&["CommonProgramFiles", "CommonProgramW6432", "CommonProgramFiles(x86)"].map(std::env::var_os), chosen.as_deref().map(Path::new));
                 match (amds, mux) {
                     (true, true) => Probe::Ok("Apple Mobile Device Service is running".into()),
                     (true, false) => Probe::NeedsRestart("Apple Mobile Device Support is installed, but its service isn't answering yet".into()),
@@ -446,6 +459,27 @@ mod tests {
         let items = run(&env, &mut |_| {});
         assert!(items[..4].iter().all(|i| i.state == State::Failed && i.detail.contains("App Installer")));
         assert!(env.calls.lock().unwrap().is_empty());
+    }
+
+    #[test]
+    fn apple_support_is_found_in_any_common_files_folder() {
+        let root = std::env::temp_dir().join(format!("swiftwin-apple-dirs-{}", std::process::id()));
+        let (x64, x86) = (root.join("x64"), root.join("x86"));
+        std::fs::create_dir_all(&x64).unwrap();
+        std::fs::create_dir_all(x86.join("Apple").join("Mobile Device Support")).unwrap();
+        // The usual folder is empty; iTunes put it in the other one.
+        assert!(apple_support_installed(&[Some(x64.clone().into()), None, Some(x86.into())], None));
+        assert!(!apple_support_installed(&[Some(x64.clone().into()), None, None], None));
+
+        // A folder picked by hand counts when it holds the service, or the parent of that folder.
+        let custom = root.join("custom");
+        std::fs::create_dir_all(custom.join("Mobile Device Support")).unwrap();
+        assert!(!apple_support_installed(&[None, None, None], Some(&custom)), "no service exe yet");
+        std::fs::write(custom.join("Mobile Device Support").join("AppleMobileDeviceService.exe"), b"").unwrap();
+        assert!(apple_support_installed(&[None, None, None], Some(&custom)), "the parent folder works");
+        assert_eq!(apple_support_folder(&custom.join("Mobile Device Support")), Some(custom.join("Mobile Device Support")));
+        assert_eq!(apple_support_folder(&x64), None);
+        let _ = std::fs::remove_dir_all(&root);
     }
 
     #[test]

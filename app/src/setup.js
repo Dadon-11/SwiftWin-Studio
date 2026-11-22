@@ -24,10 +24,12 @@ function row(it, sdk) {
   const [cls, label] = BADGE[state] || BADGE.missing;
   const pct = it.id === "sdk" && sdk?.running && sdk.total ? Math.round((100 * sdk.done) / sdk.total) : null;
   const signin = it.id === "sdk" && state !== "done" && state !== "working";
+  const chooseApple = it.id === "apple" && state !== "done" && state !== "working";
   return `<div class="check" data-id="${it.id}"><span class="badge ${cls}">${label}</span><div><b>${esc(it.title)}</b>
     <div class="detail">${esc(detail)}</div>
     ${pct !== null ? `<div class="setup-bar"><i style="width:${pct}%"></i></div>` : ""}
     ${it.fix && (state === "failed" || state === "action") ? `<div class="fix">${esc(it.fix)}</div>` : ""}
+    ${chooseApple ? `<div class="form-actions"><button class="btn small" id="setup-apple-dir" title="Pick the folder with AppleMobileDeviceService.exe">${icon("folder")}iTunes is already installed: choose its folder</button></div>` : ""}
     ${signin ? `<div class="form-actions"><button class="btn small" id="setup-signin">${icon("user")}Sign in with your Apple ID</button></div>` : ""}
   </div></div>`;
 }
@@ -61,6 +63,19 @@ export async function setupDialog({ first = false } = {}) {
     if (done) q("#setup-run").onclick = close;
     const b = q("#setup-signin");
     if (b) b.onclick = signin;
+    const a = q("#setup-apple-dir");
+    if (a) a.onclick = chooseApple;
+  };
+
+  const chooseApple = async () => {
+    try {
+      const r = await call("setup_choose_apple_dir");
+      if (r.cancelled) return;
+      toast("Found it. Checking again…", "success");
+      render(await call("setup_status"));
+    } catch (e) {
+      toast(e.message, "error");
+    }
   };
 
   const signin = async () => {

@@ -28,6 +28,9 @@ pub struct Config {
     pub sdk: Option<String>,
     /// Path to the Swift toolchain's `bin` directory, if not on PATH.
     pub swift_bin: Option<String>,
+    /// Folder holding AppleMobileDeviceService.exe, when the user picked it because iTunes put it
+    /// somewhere SwiftWin doesn't look ("Set up this PC" → Apple's USB service).
+    pub apple_support_dir: Option<String>,
     /// GitHub repo ("owner/name") used for cloud release builds.
     pub release_repo: Option<String>,
     /// How apps are signed: unset = App Store Connect API key (paid account),
